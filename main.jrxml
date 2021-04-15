@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="main_report" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="0" bottomMargin="0" uuid="9e79fc51-e815-4958-aec9-57089a7ce791">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{REPORT_PATH}+"style.jrtx"]]></template>
+	<subDataset name="PropertiesDataset" uuid="bc3dad67-ea98-4b65-8a66-fcea3e8adb05">
+		<field name="this" class="com.archimatetool.model.IProperty"/>
+		<field name="key" class="java.lang.String"/>
+		<field name="value" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="ElementsDataset" uuid="3fa586b6-b90f-47ad-8565-293b1a3fe7fc">
+		<field name="this" class="com.archimatetool.model.IArchimateElement"/>
+		<field name="name" class="java.lang.String"/>
+		<field name="type" class="java.lang.String"/>
+		<field name="documentation" class="java.lang.String"/>
+		<field name="relation_source" class="java.lang.String"/>
+		<field name="relation_target" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="REPORT_TITLE" class="java.lang.String"/>
+	<parameter name="view_report" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="properties_report" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="diagram_object_report" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="elements_report" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DATE_NOW" class="java.lang.String">
+		<defaultValueExpression><![CDATA[(new java.text.SimpleDateFormat("d MMM yyyy HH:mm:ss")).format(new java.util.Date())]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_PATH" class="java.lang.String"/>
+	<field name="this" class="com.archimatetool.model.IArchimateModel"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="purpose" class="java.lang.String"/>
+	<variable name="MODEL_HIDE_STRATEGY" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_BUSINESS" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_APPLICATION" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_TECHNOLOGY_PHYSICAL" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_MOTIVATION" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_IMPLEMENTATION_MIGRATION" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_OTHER" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_RELATIONS" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_VIEWS" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HIDE_VIEW_NUMBERING" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="NON_REPORT_ENTRIES" class="java.lang.Integer" calculation="System">
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_COVER_BACKGROUND" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="MODEL_HEADER_BACKGROUND" class="java.lang.String" calculation="System">
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="REPORT_TITLE" class="java.lang.String" resetType="None" calculation="System">
+		<variableExpression><![CDATA[$P{REPORT_TITLE}.split("\\#")[0]]]></variableExpression>
+	</variable>
+	<variable name="REPORT_TAG" class="java.lang.String" resetType="None" calculation="System">
+		<variableExpression><![CDATA[$P{REPORT_TITLE}.contains("#") ?
+    $P{REPORT_TITLE}.split("\\#")[1]
+    : ""]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="60"/>
+	</pageHeader>
+	<detail>
+		<band height="90">
+			<printWhenExpression><![CDATA[!$V{MODEL_HIDE_VIEWS}.equals("true")]]></printWhenExpression>
+			<break>
+				<reportElement x="0" y="0" width="1" height="1" uuid="d7029caa-bea7-43fc-8b8a-e454ffd40713"/>
+			</break>
+			<textField>
+				<reportElement style="Title 1" x="0" y="1" width="515" height="25" uuid="eb501373-2891-4c92-bdfa-bd8289e89d4b">
+					<property name="net.sf.jasperreports.export.pdf.tag.h1"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$R{text.views}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="0" y="40" width="515" height="50" isRemoveLineWhenBlank="true" uuid="0834205d-fd47-4315-99d6-610229e94773"/>
+				<subreportParameter name="diagram_object_report">
+					<subreportParameterExpression><![CDATA[$P{diagram_object_report}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="properties_report">
+					<subreportParameterExpression><![CDATA[$P{properties_report}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="elements_report">
+					<subreportParameterExpression><![CDATA[$P{elements_report}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="REPORT_TAG">
+					<subreportParameterExpression><![CDATA[$V{REPORT_TAG}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HIDE_VIEW_NUMBERING">
+					<subreportParameterExpression><![CDATA[$V{MODEL_HIDE_VIEW_NUMBERING}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="REPORT_PATH">
+					<subreportParameterExpression><![CDATA[$P{REPORT_PATH}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="REPORT_RESOURCE_BUNDLE">
+					<subreportParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[((com.archimatetool.jasperreports.data.ArchimateModelDataSource)$P{REPORT_DATA_SOURCE}).getViewsDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{view_report}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement style="Page footer" x="0" y="0" width="404" height="50" uuid="7b0e6db8-294b-4dfd-b3ac-26706f296430"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{REPORT_TITLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Page footer" x="404" y="0" width="81" height="50" uuid="48fabb31-a678-4218-bb76-0b8d3e7f6a8e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Page footer" x="485" y="0" width="30" height="50" uuid="1ad58d4f-dc41-4b0f-9654-30ddc04b0173"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
