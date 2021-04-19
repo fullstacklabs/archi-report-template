@@ -12,7 +12,7 @@ To use this diagram (on a Mac):
 - Set location, filename and title to what you want, select “PDF”
 - Click “Next”
 - In the “Report Template” dropdown, select “CleanTemplate”
-- Click “Finish”, report will be generated in the location you set in step 2
+- Click “Finish”, report will be generated in the location you set previously
 
 Once you've generated the PDF, Adobe offeres a sharing services which allows you to send it out to others for feedback and review:
 
